@@ -9,7 +9,6 @@ import org.junit.Test;
 public class VirtualPetShelterTest {
 
 	private static final String NAME = "Name";
-	private static final String OTHER_NAME = "Other Name";
 	private static final String DESCRIPTION = "Description";
 	private VirtualPetShelter underTest;
 
@@ -17,16 +16,20 @@ public class VirtualPetShelterTest {
 	public void setup() {
 		underTest = new VirtualPetShelter(3);
 		underTest.admitNewPet(NAME, DESCRIPTION);
-		underTest.admitNewPet(OTHER_NAME, DESCRIPTION);
 	}
 
 	@Test
-	public void shouldAdmitTwoNewPets() {
+	public void shouldAdmitNewPet() {
 		VirtualPet cat = underTest.getPet(NAME);
-		VirtualPet otherCat = underTest.getPet(OTHER_NAME);
 
 		assertThat(cat.getName(), is(NAME));
-		assertThat(otherCat.getName(), is(OTHER_NAME));
+	}
+
+	@Test
+	public void shouldRemovePetWhenAdopted() {
+		underTest.adoptOutPet(NAME);
+
+		assertThat(underTest.checkIfPetExists(NAME), is(false));
 	}
 
 	@Test
@@ -56,6 +59,31 @@ public class VirtualPetShelterTest {
 		underTest.addLitterBox();
 
 		assertThat(underTest.getLitterBoxLevel(2), is(0));
+	}
+
+	@Test
+	public void shouldFindCleanLitterBox() {
+		underTest.scoopLitterBox(1);
+		int boxNum = underTest.findCleanLitterBox();
+
+		assertThat(boxNum, is(1));
+	}
+
+	@Test
+	public void petsShouldTakeCareOfSelves() {
+		underTest.admitNewPetWithSpecialValues("Extra", DESCRIPTION, 60, 60, 60, 60, 60);
+		underTest.putOutFood(1);
+		underTest.putOutWater();
+		underTest.scoopLitterBox(1);
+		underTest.petsTakeCareOfSelves();
+
+		VirtualPet testPet = underTest.getPet("Extra");
+		assertThat(testPet.getHungerLevel(), is(30));
+		assertThat(testPet.getThirstLevel(), is(40));
+		assertThat(testPet.getWasteLevel(), is(0));
+		assertThat(underTest.getFoodBowlLevel(), is(5));
+		assertThat(underTest.getWaterBowlLevel(), is(5));
+		assertThat(underTest.getLitterBoxLevel(1), is(1));
 	}
 
 }
