@@ -19,6 +19,7 @@ public class VirtualPet {
 	Random randomGen = new Random();
 
 	// int hasSleptOnFloorCount;
+	// TODO add nature modififer (normal/hyperactive/lazy)
 
 	public VirtualPet(String name, String description) {
 		this(name, description, 20, 20, 50, 10, 0);
@@ -113,7 +114,7 @@ public class VirtualPet {
 	// else
 	// litterBoxLevel++;
 	// }
-	// TODO add used floor before feature in pet shelter class
+	// TODO add used floor before feature in pet shelter class w/ boolean return
 
 	public void tick() {
 		hungerLevel += 10;
@@ -142,4 +143,8 @@ public class VirtualPet {
 			wasteLevel = 100;
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
 }
