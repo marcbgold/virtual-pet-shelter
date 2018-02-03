@@ -80,6 +80,12 @@ public class VirtualPetShelterApp {
 
 			switch (choice) {
 			case "1":
+				System.out.println("Current Virtual Cat Roster");
+				System.out.println("---------------------------");
+				for (VirtualPet currentPet : currentPetList) {
+					System.out.println(currentPet);
+				}
+				System.out.println();
 				System.out.println("Please enter the name of the cat you would like to play with:");
 				nameInput = input.nextLine().trim();
 
@@ -228,6 +234,12 @@ public class VirtualPetShelterApp {
 				input.nextLine();
 				break;
 			case "7":
+				System.out.println("Current Virtual Cat Roster");
+				System.out.println("---------------------------");
+				for (VirtualPet currentPet : currentPetList) {
+					System.out.println(currentPet);
+				}
+				System.out.println();
 				System.out.println("Please enter the name of the cat you would like to adopt out:");
 				nameInput = input.nextLine().trim();
 				System.out.println();
