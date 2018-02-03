@@ -12,13 +12,12 @@ public class VirtualPet {
 	private int tirednessLevel;
 	private int wasteLevel;
 
-	int dislikedFoodType; // TODO add disliked/hated food type feature
+	int dislikedFoodType;
 	int hatedFoodType;
 	int minFoodType = 1;
 	int maxFoodType = 4;
 	Random randomGen = new Random();
 
-	// int hasSleptOnFloorCount;
 	// TODO add nature modififer (normal/hyperactive/lazy)
 
 	public VirtualPet(String name, String description) {
@@ -47,6 +46,10 @@ public class VirtualPet {
 		return description;
 	}
 
+	public String getStats() {
+		return name + "\t\t|" + hungerLevel + "\t|" + thirstLevel + "\t|" + boredomLevel + "\t |" + tirednessLevel + "\t\t|" + wasteLevel;
+	}
+
 	public int getHungerLevel() {
 		return hungerLevel;
 	}
@@ -67,12 +70,19 @@ public class VirtualPet {
 		return wasteLevel;
 	}
 
+	public int getDislikedFoodType() {
+		return dislikedFoodType;
+	}
+
+	public int getHatedFoodType() {
+		return hatedFoodType;
+	}
+
 	public void eat() {
 		hungerLevel -= 40;
 		thirstLevel += 10;
 		tirednessLevel += 10;
 		wasteLevel += 20;
-		// foodBowlLevel--;
 
 		checkForValuesOver100();
 	}
@@ -80,7 +90,6 @@ public class VirtualPet {
 	public void drink() {
 		thirstLevel -= 40;
 		wasteLevel += 20;
-		// waterBowlLevel--;
 
 		checkForValuesOver100();
 	}
@@ -97,9 +106,7 @@ public class VirtualPet {
 	public void sleep() {
 		hungerLevel += 20;
 		thirstLevel += 20;
-		// if (tirednessLevel == 100)
-		// hasSleptOnFloorCount++;
-		// TODO add has slept on floor feature
+		boredomLevel += 20;
 		tirednessLevel -= tirednessLevel;
 
 		checkForValuesOver100();
@@ -108,13 +115,6 @@ public class VirtualPet {
 	public void useBathroom() {
 		wasteLevel -= wasteLevel;
 	}
-
-	// if (litterBoxLevel == 3)
-	// hasUsedFloorBefore = true;
-	// else
-	// litterBoxLevel++;
-	// }
-	// TODO add used floor before feature in pet shelter class w/ boolean return
 
 	public void tick() {
 		hungerLevel += 10;

@@ -49,24 +49,43 @@ public class VirtualPetShelterTest {
 
 	@Test
 	public void scoopLitterBoxShouldLowerLitterBoxLevelToZero() {
-		underTest.scoopLitterBox(0);
+		underTest.scoopLitterBox("1");
 
-		assertThat(underTest.getLitterBoxLevel(0), is(0));
+		assertThat(underTest.getLitterBoxLevel("1"), is(0));
 	}
 
 	@Test
 	public void shouldAddNewLitterBox() {
 		underTest.addLitterBox();
 
-		assertThat(underTest.getLitterBoxLevel(2), is(0));
+		assertThat(underTest.getLitterBoxLevel("2"), is(0));
 	}
 
 	@Test
 	public void shouldFindCleanLitterBox() {
-		underTest.scoopLitterBox(1);
-		int boxNum = underTest.findCleanLitterBox();
+		underTest.scoopLitterBox("1");
+		String boxNum = underTest.findCleanLitterBox();
 
 		assertThat(boxNum, is(1));
+	}
+
+	@Test
+	public void shouldPlayWithPet() {
+		VirtualPet pet = underTest.getPet(NAME);
+		pet.play();
+
+		assertThat(pet.getBoredomLevel(), is(10));
+	}
+
+	@Test
+	public void petShouldRefuseToPlayWhenNotBoredEnoughOrTooTired() {
+		underTest.admitNewPetWithSpecialValues("NotBoredEnough", DESCRIPTION, 60, 60, 0, 60, 60);
+		underTest.admitNewPetWithSpecialValues("TooTired", DESCRIPTION, 60, 60, 60, 80, 60);
+		String firstResult = underTest.playWithPet("NotBoredEnough");
+		String secondResult = underTest.playWithPet("TooTired");
+
+		assertThat(firstResult, is("not bored enough"));
+		assertThat(secondResult, is("too tired"));
 	}
 
 	@Test
@@ -74,16 +93,24 @@ public class VirtualPetShelterTest {
 		underTest.admitNewPetWithSpecialValues("Extra", DESCRIPTION, 60, 60, 60, 60, 60);
 		underTest.putOutFood(1);
 		underTest.putOutWater();
-		underTest.scoopLitterBox(1);
+		underTest.scoopLitterBox("1");
 		underTest.petsTakeCareOfSelves();
 
 		VirtualPet testPet = underTest.getPet("Extra");
-		assertThat(testPet.getHungerLevel(), is(30));
-		assertThat(testPet.getThirstLevel(), is(40));
+		assertThat(testPet.getHungerLevel(), is(50));
+		assertThat(testPet.getThirstLevel(), is(60));
 		assertThat(testPet.getWasteLevel(), is(0));
 		assertThat(underTest.getFoodBowlLevel(), is(5));
 		assertThat(underTest.getWaterBowlLevel(), is(5));
-		assertThat(underTest.getLitterBoxLevel(1), is(1));
+		assertThat(underTest.getLitterBoxLevel("1"), is(1));
+	}
+
+	@Test
+	public void petShouldUseFloorWhenThereIsNoCleanLitterBox() {
+		underTest.admitNewPetWithSpecialValues("Extra", DESCRIPTION, 60, 60, 60, 60, 100);
+		underTest.petsTakeCareOfSelves();
+
+		assertThat(underTest.getPetHasUsedFloorCount(), is(1));
 	}
 
 }
