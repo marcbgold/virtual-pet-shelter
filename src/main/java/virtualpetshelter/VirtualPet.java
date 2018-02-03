@@ -59,8 +59,8 @@ public class VirtualPet {
 		} else { // if (name.length() < 15) {
 			namePart = name + "\t|";
 		} // else {
-		// namePart = name + " |";
-		// }
+			// namePart = name + " |";
+			// }
 		return namePart + hungerLevel + "\t|" + thirstLevel + "\t|" + boredomLevel + "\t |" + tirednessLevel + "\t\t|" + wasteLevel;
 	}
 
@@ -93,7 +93,7 @@ public class VirtualPet {
 	}
 
 	public void eat() {
-		hungerLevel -= 40;
+		hungerLevel -= 50;
 		thirstLevel += 10;
 		tirednessLevel += 10;
 		wasteLevel += 20;
@@ -102,16 +102,16 @@ public class VirtualPet {
 	}
 
 	public void drink() {
-		thirstLevel -= 40;
+		thirstLevel -= 50;
 		wasteLevel += 20;
 
 		checkForValuesOver100();
 	}
 
 	public void play() {
-		boredomLevel -= 40;
 		hungerLevel += 10;
 		thirstLevel += 10;
+		boredomLevel = 0;
 		tirednessLevel += 30;
 
 		checkForValuesOver100();
@@ -121,13 +121,13 @@ public class VirtualPet {
 		hungerLevel += 20;
 		thirstLevel += 20;
 		boredomLevel += 20;
-		tirednessLevel -= tirednessLevel;
+		tirednessLevel = 0;
 
 		checkForValuesOver100();
 	}
 
 	public void useBathroom() {
-		wasteLevel -= wasteLevel;
+		wasteLevel = 0;
 	}
 
 	public void tick() {

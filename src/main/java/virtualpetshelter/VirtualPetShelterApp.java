@@ -69,11 +69,12 @@ public class VirtualPetShelterApp {
 			System.out.println("2. Put out food");
 			System.out.println("3. Put out water");
 			System.out.println("4. Scoop out a litter box");
-			System.out.println("5. Admit new cat to shelter");
-			System.out.println("6. Adopt out cat");
-			System.out.println("7. Look at the description of a cat");
-			System.out.println("8. Loaf around");
-			System.out.println("9. Quit");
+			System.out.println("5. Add an additional litter box");
+			System.out.println("6. Admit new cat to shelter");
+			System.out.println("7. Adopt out cat");
+			System.out.println("8. Look at the description of a cat");
+			System.out.println("9. Loaf around");
+			System.out.println("10. Quit");
 			choice = input.nextLine();
 			System.out.println();
 
@@ -182,6 +183,13 @@ public class VirtualPetShelterApp {
 					break;
 				}
 			case "5":
+				myShelter.addLitterBox();
+
+				System.out.println("You put out an additional litter box. That should help keep the place clean.");
+				System.out.println("Press enter to continue.");
+				input.nextLine();
+				break;
+			case "6":
 				System.out.println("Please enter the name of the cat you would like to admit:");
 				nameInput = input.nextLine().trim();
 				if (nameInput.equals("")) {
@@ -219,7 +227,7 @@ public class VirtualPetShelterApp {
 				System.out.println("Press enter to continue.");
 				input.nextLine();
 				break;
-			case "6":
+			case "7":
 				System.out.println("Please enter the name of the cat you would like to adopt out:");
 				nameInput = input.nextLine().trim();
 				System.out.println();
@@ -238,7 +246,7 @@ public class VirtualPetShelterApp {
 				System.out.println("Press enter to continue.");
 				input.nextLine();
 				break;
-			case "7":
+			case "8":
 				System.out.println("Please enter the name of the cat whose description you would like to see:");
 				nameInput = input.nextLine().trim();
 				System.out.println();
@@ -257,29 +265,29 @@ public class VirtualPetShelterApp {
 				System.out.println("Press enter to continue.");
 				input.nextLine();
 				continue;
-			case "8":
+			case "9":
 				System.out.println("OK, I guess you can just stare at the cats if you feel like it.");
 				System.out.println("Don't stare for too long, though.  You have work to do.");
 				System.out.println("Press enter to continue.");
 				input.nextLine();
 				break;
-			case "9":
+			case "10":
 				break;
 			default:
 				continue;
 			}
 
-			if (!choice.equals("9")) {
+			if (!choice.equals("10")) {
 				System.out.println();
 				myShelter.petsTakeCareOfSelves();
 			}
 
-		} while (!choice.equals("9") && myShelter.getPetHasUsedFloorCount() < 3);
+		} while (!choice.equals("10") && myShelter.getPetHasUsedFloorCount() < 3);
 
-		if (myShelter.getPetHasUsedFloorCount() == 3) {
+		if (myShelter.getPetHasUsedFloorCount() >= 3) {
 			System.out.println("OK, seriously.  Why did you never scoop out the litter boxes on time?!");
 			System.out.print("You forced the cats to go on the floor so many times that Animal Protection Services shut down the shelter");
-			System.out.println("for being a health hazard!");
+			System.out.println(" for being a health hazard!");
 			System.out.println("That's gross, and you suck.  Last time I ever let YOU help me with anything.");
 		} else {
 			System.out.println("Bye! Thanks for volunteering. Come back later and help out again, OK?");
