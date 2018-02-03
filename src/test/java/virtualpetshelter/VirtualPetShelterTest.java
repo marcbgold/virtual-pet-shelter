@@ -66,7 +66,7 @@ public class VirtualPetShelterTest {
 		underTest.scoopLitterBox("1");
 		String boxNum = underTest.findCleanLitterBox();
 
-		assertThat(boxNum, is(1));
+		assertThat(boxNum, is("1"));
 	}
 
 	@Test
@@ -79,8 +79,8 @@ public class VirtualPetShelterTest {
 
 	@Test
 	public void petShouldRefuseToPlayWhenNotBoredEnoughOrTooTired() {
-		underTest.admitNewPetWithSpecialValues("NotBoredEnough", DESCRIPTION, 60, 60, 0, 60, 60);
-		underTest.admitNewPetWithSpecialValues("TooTired", DESCRIPTION, 60, 60, 60, 80, 60);
+		underTest.admitNewPetWithSpecialValues("NotBoredEnough", DESCRIPTION, 60, 60, 0, 60, 60, 0, 0);
+		underTest.admitNewPetWithSpecialValues("TooTired", DESCRIPTION, 60, 60, 60, 80, 60, 0, 0);
 		String firstResult = underTest.playWithPet("NotBoredEnough");
 		String secondResult = underTest.playWithPet("TooTired");
 
@@ -90,7 +90,7 @@ public class VirtualPetShelterTest {
 
 	@Test
 	public void petsShouldTakeCareOfSelves() {
-		underTest.admitNewPetWithSpecialValues("Extra", DESCRIPTION, 60, 60, 60, 60, 60);
+		underTest.admitNewPetWithSpecialValues("Extra", DESCRIPTION, 60, 60, 60, 60, 60, 3, 4);
 		underTest.putOutFood(1);
 		underTest.putOutWater();
 		underTest.scoopLitterBox("1");
@@ -107,7 +107,7 @@ public class VirtualPetShelterTest {
 
 	@Test
 	public void petShouldUseFloorWhenThereIsNoCleanLitterBox() {
-		underTest.admitNewPetWithSpecialValues("Extra", DESCRIPTION, 60, 60, 60, 60, 100);
+		underTest.admitNewPetWithSpecialValues("Extra", DESCRIPTION, 60, 60, 60, 60, 100, 0, 0);
 		underTest.petsTakeCareOfSelves();
 
 		assertThat(underTest.getPetHasUsedFloorCount(), is(1));

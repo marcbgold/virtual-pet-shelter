@@ -46,14 +46,13 @@ public class VirtualPetShelter {
 		return petHasUsedFloorCount;
 	}
 
-	// TODO implement pet has used floor consequence
-
 	public void admitNewPet(String name, String description) {
 		roster.put(name, new VirtualPet(name, description));
 	}
 
-	public void admitNewPetWithSpecialValues(String name, String description, int hunger, int thirst, int boredom, int tiredness, int waste) {
-		roster.put(name, new VirtualPet(name, description, hunger, thirst, boredom, tiredness, waste));
+	public void admitNewPetWithSpecialValues(String name, String description, int hunger, int thirst, int boredom, int tiredness, int waste, int dislikedFoodType,
+			int hatedFoodType) {
+		roster.put(name, new VirtualPet(name, description, hunger, thirst, boredom, tiredness, waste, dislikedFoodType, hatedFoodType));
 	}
 
 	public boolean checkIfPetExists(String name) {

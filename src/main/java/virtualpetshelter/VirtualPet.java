@@ -21,10 +21,10 @@ public class VirtualPet {
 	// TODO add nature modififer (normal/hyperactive/lazy)
 
 	public VirtualPet(String name, String description) {
-		this(name, description, 20, 20, 50, 10, 0);
+		this(name, description, 20, 20, 50, 10, 0, 0, 0);
 	}
 
-	public VirtualPet(String name, String description, int hunger, int thirst, int boredom, int tiredness, int waste) {
+	public VirtualPet(String name, String description, int hunger, int thirst, int boredom, int tiredness, int waste, int dislikedFoodType, int hatedFoodType) {
 		this.name = name;
 		hungerLevel = hunger;
 		thirstLevel = thirst;
@@ -32,10 +32,15 @@ public class VirtualPet {
 		tirednessLevel = tiredness;
 		wasteLevel = waste;
 
-		dislikedFoodType = randomGen.nextInt((maxFoodType - minFoodType) + 1) + minFoodType;
-		do {
-			hatedFoodType = randomGen.nextInt((maxFoodType - minFoodType) + 1) + minFoodType;
-		} while (dislikedFoodType == hatedFoodType);
+		if (dislikedFoodType != 0) {
+			this.dislikedFoodType = dislikedFoodType;
+			this.hatedFoodType = hatedFoodType;
+		} else {
+			dislikedFoodType = randomGen.nextInt((maxFoodType - minFoodType) + 1) + minFoodType;
+			do {
+				hatedFoodType = randomGen.nextInt((maxFoodType - minFoodType) + 1) + minFoodType;
+			} while (dislikedFoodType == hatedFoodType);
+		}
 	}
 
 	public String getName() {

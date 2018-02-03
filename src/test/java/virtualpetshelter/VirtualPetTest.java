@@ -15,16 +15,18 @@ public class VirtualPetTest {
 	private static final int BOREDOM = 60;
 	private static final int TIREDNESS = 60;
 	private static final int WASTE = 60;
+	private static final int DISLIKED_FOOD_TYPE = 0;
+	private static final int HATED_FOOD_TYPE = 0;
 	private VirtualPet underTest;
 
 	@Before
 	public void setup() {
-		underTest = new VirtualPet(NAME, DESCRIPTION, HUNGER, THIRST, BOREDOM, TIREDNESS, WASTE);
+		underTest = new VirtualPet(NAME, DESCRIPTION, HUNGER, THIRST, BOREDOM, TIREDNESS, WASTE, DISLIKED_FOOD_TYPE, HATED_FOOD_TYPE);
 	}
 
 	@Test
 	public void checkForValuesOver100ShouldKeepValuesFromGoingOver100() {
-		underTest = new VirtualPet(NAME, DESCRIPTION, 110, 110, 110, 110, 110);
+		underTest = new VirtualPet(NAME, DESCRIPTION, 110, 110, 110, 110, 110, DISLIKED_FOOD_TYPE, HATED_FOOD_TYPE);
 		underTest.checkForValuesOver100();
 
 		assertThat(underTest.getHungerLevel(), is(100));
