@@ -26,6 +26,7 @@ public class VirtualPet {
 
 	public VirtualPet(String name, String description, int hunger, int thirst, int boredom, int tiredness, int waste, int dislikedFoodType, int hatedFoodType) {
 		this.name = name;
+		this.description = description;
 		hungerLevel = hunger;
 		thirstLevel = thirst;
 		boredomLevel = boredom;
@@ -52,7 +53,15 @@ public class VirtualPet {
 	}
 
 	public String getStats() {
-		return name + "\t\t|" + hungerLevel + "\t|" + thirstLevel + "\t|" + boredomLevel + "\t |" + tirednessLevel + "\t\t|" + wasteLevel;
+		String namePart = "";
+		if (name.length() < 9) {
+			namePart = name + "\t\t|";
+		} else { // if (name.length() < 15) {
+			namePart = name + "\t|";
+		} // else {
+		// namePart = name + " |";
+		// }
+		return namePart + hungerLevel + "\t|" + thirstLevel + "\t|" + boredomLevel + "\t |" + tirednessLevel + "\t\t|" + wasteLevel;
 	}
 
 	public int getHungerLevel() {

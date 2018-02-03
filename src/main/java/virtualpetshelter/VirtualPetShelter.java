@@ -8,8 +8,8 @@ import java.util.Map.Entry;
 public class VirtualPetShelter {
 
 	private Map<String, VirtualPet> roster = new HashMap<>();
-	private String defaultName = "Mario";
-	private String defaultDescription = "Short, fat, male tabby with bushy, kinda reddish fur.  Seems to like mushrooms and flowers for some odd reason.";
+	private final String DEFAULT_NAME = "Mario";
+	private final String DEFAULT_DESCRIPTION = "Short, fat, male tabby with bushy, kinda reddish fur.  Seems to like mushrooms and flowers for some odd reason.";
 	private int foodBowlLevel;
 	private int foodType;
 	private int waterBowlLevel;
@@ -23,7 +23,7 @@ public class VirtualPetShelter {
 
 	public VirtualPetShelter(int litterBoxLevel) {
 		litterBoxes.put("1", litterBoxLevel);
-		admitNewPet(defaultName, defaultDescription);
+		admitNewPet(DEFAULT_NAME, DEFAULT_DESCRIPTION);
 	}
 
 	public int getFoodBowlLevel() {

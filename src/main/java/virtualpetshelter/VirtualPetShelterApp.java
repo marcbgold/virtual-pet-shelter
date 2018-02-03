@@ -35,7 +35,6 @@ public class VirtualPetShelterApp {
 			System.out.println("Current Virtual Cat Roster");
 			System.out.println("---------------------------");
 			System.out.println("Name\t\t|Hunger\t|Thirst\t|Boredom |Tiredness \t|\"Waste\"");
-			System.out.println();
 
 			currentPetList = myShelter.getAllPets();
 			for (VirtualPet currentPet : currentPetList) {
@@ -75,7 +74,7 @@ public class VirtualPetShelterApp {
 			System.out.println("7. Look at the description of a cat");
 			System.out.println("8. Loaf around");
 			System.out.println("9. Quit");
-			choice = input.next().trim();
+			choice = input.nextLine();
 			System.out.println();
 
 			switch (choice) {
@@ -94,11 +93,11 @@ public class VirtualPetShelterApp {
 
 				if (!actionResult.equals("success")) {
 					if (actionResult.equals("not bored enough")) {
-						System.out.println(nameInput + " wasn't bored enough to play with you right now. Try again later.");
+						System.out.println(nameInput + " isn't bored enough to play with you right now. Try again later.");
 					} else if (actionResult.equals("too tired")) {
-						System.out.println(nameInput + " was too tired to play with you right now. Try again later.");
+						System.out.println(nameInput + " is too tired to play with you right now. Try again later.");
 					} else {
-						System.out.println(nameInput + " was too hungry to play with you right now. Try again later.");
+						System.out.println(nameInput + " is too hungry to play with you right now. Try again later.");
 					}
 
 					System.out.println("Press enter to continue.");
@@ -190,6 +189,14 @@ public class VirtualPetShelterApp {
 				}
 				System.out.println();
 
+				if (nameInput.length() > 15) {
+					System.out.println("That name is too long.");
+					System.out.println("Names over 15 characters screw up the roster formatting.  Try a shorter one.");
+					System.out.println("Press enter to continue.");
+					input.nextLine();
+					continue;
+				}
+
 				if (myShelter.checkIfPetExists(nameInput)) {
 					System.out.println("There's already a cat with that name in this shelter.");
 					System.out.println("It'd be too confusing if two cats had the same name.  Try a different one.");
@@ -249,7 +256,7 @@ public class VirtualPetShelterApp {
 				System.out.println();
 				System.out.println("Press enter to continue.");
 				input.nextLine();
-				break;
+				continue;
 			case "8":
 				System.out.println("OK, I guess you can just stare at the cats if you feel like it.");
 				System.out.println("Don't stare for too long, though.  You have work to do.");
